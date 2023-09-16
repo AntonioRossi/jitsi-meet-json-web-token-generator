@@ -89,7 +89,7 @@ To ensure that your Jitsi Meet instance works seamlessly with this Next.js JWT g
 
 ```bash
 # Enable authentication.
-AUTH_TYPE=token
+AUTH_TYPE=jwt
 
 # Application identifier.
 JWT_APP_ID=<Your_App_ID>

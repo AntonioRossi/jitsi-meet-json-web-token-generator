@@ -27,6 +27,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const end_time = start_time.add(durationValue.asMilliseconds(), 'millisecond');
 
   const payload = {
+    context: {},
     aud: appId,
     iss: appId,
     sub: domain,
