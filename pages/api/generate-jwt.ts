@@ -14,13 +14,20 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const {
     room,
-    date, 
-    hours, 
+    date,
+    hours,
     minutes,
     domain,
     appId,
     secret
   } = req.body;
+
+  // replace spaces with underscore
+  let roomName = room.split(' ').join('-');
+  // Filter out special characters, but keep underscores
+  roomName = roomName.replace(/[^a-zA-Z0-9_]/g, '');
+  // encode
+  roomName = encodeURIComponent(roomName);
 
   const start_time = dayjs(date);  // Use the passed date from the client
   const durationValue = dayjs.duration({ hours: hours, minutes: minutes });
@@ -31,7 +38,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     aud: appId,
     iss: appId,
     sub: domain,
-    room: room,
+    room: roomName,
     exp: end_time.unix(),
     nbf: start_time.unix(),
   };
