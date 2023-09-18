@@ -23,7 +23,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   } = req.body;
 
   // replace spaces with underscore
-  let roomName = room.split(' ').join('-');
+  let roomName = room.split(' ').join('_');
   // Filter out special characters, but keep underscores
   roomName = roomName.replace(/[^a-zA-Z0-9_]/g, '');
   // encode
@@ -46,7 +46,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const token = jwt.sign(payload, secret, { algorithm: 'HS256' });
 
   const base_url = `https://${domain}/`;
-  const jwt_url = `${base_url}${room}?jwt=${token}`;
+  const jwt_url = `${base_url}${roomName}?jwt=${token}`;
 
   res.status(200).json({ jwt_url });
 }
